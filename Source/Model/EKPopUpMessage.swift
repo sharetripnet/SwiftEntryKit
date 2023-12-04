@@ -39,8 +39,10 @@ public struct EKPopUpMessage {
     public var themeImage: ThemeImage?
     public var title: EKProperty.LabelContent
     public var description: EKProperty.LabelContent
-    public var button: EKProperty.ButtonContent
+    public var actionButton: EKProperty.ButtonContent
+    public var cancelButton: EKProperty.ButtonContent?
     public var action: EKPopUpMessageAction
+    public var cancelAction: EKPopUpMessageAction?
     
     var containsImage: Bool {
         return themeImage != nil
@@ -49,12 +51,16 @@ public struct EKPopUpMessage {
     public init(themeImage: ThemeImage? = nil,
                 title: EKProperty.LabelContent,
                 description: EKProperty.LabelContent,
-                button: EKProperty.ButtonContent,
-                action: @escaping EKPopUpMessageAction) {
+                actionButton: EKProperty.ButtonContent,
+                cancelButton: EKProperty.ButtonContent? = nil,
+                action: @escaping EKPopUpMessageAction,
+                cancelAction: @escaping EKPopUpMessageAction) {
         self.themeImage = themeImage
         self.title = title
         self.description = description
-        self.button = button
+        self.actionButton = actionButton
+        self.cancelButton = cancelButton
         self.action = action
+        self.cancelAction = cancelAction
     }
 }
