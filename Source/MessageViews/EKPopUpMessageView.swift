@@ -16,6 +16,7 @@ final public class EKPopUpMessageView: UIView {
     private let titleLabel = UILabel()
     private let descriptionLabel = UILabel()
     private let actionButton = UIButton()
+    private let cancelButton = UIButton()
     
     private let message: EKPopUpMessage
     
@@ -73,23 +74,56 @@ final public class EKPopUpMessageView: UIView {
     
     private func setupActionButton() {
         addSubview(actionButton)
-        let height: CGFloat = 45
-        actionButton.set(.height, of: height)
-        actionButton.layout(.top, to: .bottom, of: descriptionLabel, offset: 30)
-        actionButton.layoutToSuperview(.bottom, offset: -30)
-        actionButton.layoutToSuperview(.centerX)
+        if message.cancelButton != nil {
+            addSubview(cancelButton)
+            let height: CGFloat = 40
+            actionButton.set(.height, of: height)
+            actionButton.layout(.top, to: .bottom, of: descriptionLabel, offset: 30)
+            actionButton.layoutToSuperview(.bottom, offset: -30)
+            actionButton.layoutToSuperview(.trailing, offset: -20)
+            actionButton.set(.width, of: (self.bounds.width - 80) / 2 - 4)
+            
+            let buttonAttributes = message.actionButton
+            actionButton.buttonContent = buttonAttributes
+            actionButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
+            actionButton.layer.cornerRadius = 8 // height * 0.5
+            actionButton.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
+            
+            cancelButton.set(.height, of: height)
+            cancelButton.layout(.top, to: .bottom, of: descriptionLabel, offset: 30)
+            cancelButton.layoutToSuperview(.bottom, offset: -30)
+            cancelButton.layoutToSuperview(.leading, offset: 20)
+            cancelButton.layout(.trailing, to: .leading, of: actionButton, offset: -8)
+            
+            let cancelbuttonAttributes = message.cancelButton!
+            cancelButton.buttonContent = cancelbuttonAttributes
+            cancelButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
+            cancelButton.layer.cornerRadius = 8 // height * 0.5
+            cancelButton.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
+            
+            
+        } else {
+            let height: CGFloat = 40
+            actionButton.set(.height, of: height)
+            actionButton.layout(.top, to: .bottom, of: descriptionLabel, offset: 30)
+            actionButton.layoutToSuperview(.bottom, offset: -30)
+            actionButton.layoutToSuperview(.leading, offset: 16)
+            actionButton.layoutToSuperview(.trailing, offset: -16)
+            
+            let buttonAttributes = message.actionButton
+            actionButton.buttonContent = buttonAttributes
+            actionButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
+            actionButton.layer.cornerRadius = 8 // height * 0.5
+            actionButton.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
+        }
         
-        let buttonAttributes = message.button
-        actionButton.buttonContent = buttonAttributes
-        actionButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
-        actionButton.layer.cornerRadius = height * 0.5
-        actionButton.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
+       
     }
     
     private func setupInterfaceStyle() {
         titleLabel.textColor = message.title.style.color(for: traitCollection)
         imageView?.tintColor = message.themeImage?.image.tintColor(for: traitCollection)
-        let tapColor = message.button.highlighedLabelColor(for: traitCollection)
+        let tapColor = message.actionButton.highlighedLabelColor(for: traitCollection)
         actionButton.setTitleColor(tapColor, for: .highlighted)
         actionButton.setTitleColor(tapColor, for: .selected)
     }
@@ -102,5 +136,12 @@ final public class EKPopUpMessageView: UIView {
     
     @objc func actionButtonPressed() {
         message.action()
+    }
+
+        
+    @objc func cancelButtonPressed() {
+        if let cancelAction = message.cancelAction {
+            cancelAction()
+        }
     }
 }
