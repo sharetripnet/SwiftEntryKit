@@ -55,7 +55,7 @@ final public class EKPopUpMessageView: UIView {
     private func setupTitleLabel() {
         addSubview(titleLabel)
         titleLabel.content = message.title
-        titleLabel.layoutToSuperview(axis: .horizontally, offset: 30)
+        titleLabel.layoutToSuperview(axis: .horizontally, offset: 20)
         if let imageView = imageView {
             titleLabel.layout(.top, to: .bottom, of: imageView, offset: 20)
         } else {
@@ -67,7 +67,7 @@ final public class EKPopUpMessageView: UIView {
     private func setupDescriptionLabel() {
         addSubview(descriptionLabel)
         descriptionLabel.content = message.description
-        descriptionLabel.layoutToSuperview(axis: .horizontally, offset: 30)
+        descriptionLabel.layoutToSuperview(axis: .horizontally, offset: 20)
         descriptionLabel.layout(.top, to: .bottom, of: titleLabel, offset: 16)
         descriptionLabel.forceContentWrap(.vertically)
     }
