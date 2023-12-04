@@ -557,7 +557,7 @@ class PresetsViewController: UIViewController {
             ),
             accessibilityIdentifier: "description"
         )
-        let button = EKProperty.ButtonContent(
+        let actionButton = EKProperty.ButtonContent(
             label: .init(
                 text: "Got it!",
                 style: .init(
@@ -571,12 +571,29 @@ class PresetsViewController: UIViewController {
             displayMode: displayMode,
             accessibilityIdentifier: "button"
         )
-        let message = EKPopUpMessage(
-            themeImage: themeImage,
-            title: title,
-            description: description,
-            button: button) {
-                SwiftEntryKit.dismiss()
+        let cancelButton = EKProperty.ButtonContent(
+            label: .init(
+                text: "Cancel",
+                style: .init(
+                    font: MainFont.bold.with(size: 16),
+                    color: buttonTitleColor,
+                    displayMode: displayMode
+                )
+            ),
+            backgroundColor: .greenGrass,
+            highlightedBackgroundColor: buttonTitleColor.with(alpha: 0.05),
+            displayMode: displayMode,
+            accessibilityIdentifier: "button"
+        )
+//        let message = EKPopUpMessage(themeImage: themeImage, title: title, description: description, actionButton: actionButton, cancelButton: cancelButton) {
+//            SwiftEntryKit.dismiss()
+//        } cancelAction: {
+//            SwiftEntryKit.dismiss()
+//        }
+        let message = EKPopUpMessage(themeImage: themeImage, title: title, description: description, actionButton: actionButton) {
+            SwiftEntryKit.dismiss()
+        } cancelAction: {
+//            SwiftEntryKit.dismiss()
         }
         let contentView = EKPopUpMessageView(with: message)
         SwiftEntryKit.display(entry: contentView, using: attributes)
