@@ -103,7 +103,7 @@ final public class EKPopUpMessageView: UIView {
             actionButton.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
             
             cancelButton.set(.height, of: height)
-            cancelButton.layout(.top, to: .bottom, of: descriptionLabel, offset: 30)
+            cancelButton.layout(.top, to: .bottom, of: message.extraAttributedText != nil ? extraLabel : descriptionLabel, offset: 30)
             cancelButton.layoutToSuperview(.bottom, offset: -30)
             cancelButton.layoutToSuperview(.leading, offset: 20)
             cancelButton.layout(.trailing, to: .leading, of: actionButton, offset: -8)

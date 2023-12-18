@@ -594,7 +594,7 @@ class PresetsViewController: UIViewController {
         let attributedText = NSMutableAttributedString()
         attributedText.append(NSAttributedString(string: "Payable Amount ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .semibold)]))
         attributedText.append(NSAttributedString(string: "USD 1,429.80", attributes: [NSAttributedString.Key.foregroundColor: UIColor.green, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .semibold)]))
-        let message = EKPopUpMessage(themeImage: themeImage, title: title, description: description, extraAttributedText: attributedText, actionButton: actionButton) {
+        let message = EKPopUpMessage(themeImage: themeImage, title: title, description: description, extraAttributedText: attributedText, actionButton: actionButton, cancelButton: cancelButton) {
             SwiftEntryKit.dismiss()
         } cancelAction: {
 //            SwiftEntryKit.dismiss()
