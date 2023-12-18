@@ -39,6 +39,7 @@ public struct EKPopUpMessage {
     public var themeImage: ThemeImage?
     public var title: EKProperty.LabelContent
     public var description: EKProperty.LabelContent
+    public var extraAttributedText: NSMutableAttributedString?
     public var actionButton: EKProperty.ButtonContent
     public var cancelButton: EKProperty.ButtonContent?
     public var action: EKPopUpMessageAction
@@ -51,6 +52,7 @@ public struct EKPopUpMessage {
     public init(themeImage: ThemeImage? = nil,
                 title: EKProperty.LabelContent,
                 description: EKProperty.LabelContent,
+                extraAttributedText: NSMutableAttributedString? = nil,
                 actionButton: EKProperty.ButtonContent,
                 cancelButton: EKProperty.ButtonContent? = nil,
                 action: @escaping EKPopUpMessageAction,
@@ -58,6 +60,7 @@ public struct EKPopUpMessage {
         self.themeImage = themeImage
         self.title = title
         self.description = description
+        self.extraAttributedText = extraAttributedText
         self.actionButton = actionButton
         self.cancelButton = cancelButton
         self.action = action

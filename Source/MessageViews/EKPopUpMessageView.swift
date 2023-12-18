@@ -15,6 +15,7 @@ final public class EKPopUpMessageView: UIView {
     private var imageView: UIImageView!
     private let titleLabel = UILabel()
     private let descriptionLabel = UILabel()
+    private let extraLabel = UILabel()
     private let actionButton = UIButton()
     private let cancelButton = UIButton()
     
@@ -28,6 +29,7 @@ final public class EKPopUpMessageView: UIView {
         setupImageView()
         setupTitleLabel()
         setupDescriptionLabel()
+        setupExtraLabel()
         setupActionButton()
         setupInterfaceStyle()
     }
@@ -72,13 +74,24 @@ final public class EKPopUpMessageView: UIView {
         descriptionLabel.forceContentWrap(.vertically)
     }
     
+    private func setupExtraLabel() {
+        if let attributedText = message.extraAttributedText {
+            addSubview(extraLabel)
+            extraLabel.attributedText = attributedText
+            extraLabel.textAlignment = .center
+            extraLabel.layoutToSuperview(axis: .horizontally, offset: 20)
+            extraLabel.layout(.top, to: .bottom, of: descriptionLabel, offset: 16)
+            extraLabel.forceContentWrap(.vertically)
+        }
+    }
+    
     private func setupActionButton() {
         addSubview(actionButton)
         if message.cancelButton != nil {
             addSubview(cancelButton)
             let height: CGFloat = 40
             actionButton.set(.height, of: height)
-            actionButton.layout(.top, to: .bottom, of: descriptionLabel, offset: 30)
+            actionButton.layout(.top, to: .bottom, of: message.extraAttributedText != nil ? extraLabel : descriptionLabel, offset: 30)
             actionButton.layoutToSuperview(.bottom, offset: -30)
             actionButton.layoutToSuperview(.trailing, offset: -20)
             actionButton.set(.width, of: (self.bounds.width - 80) / 2 - 4)
@@ -105,7 +118,7 @@ final public class EKPopUpMessageView: UIView {
         } else {
             let height: CGFloat = 40
             actionButton.set(.height, of: height)
-            actionButton.layout(.top, to: .bottom, of: descriptionLabel, offset: 30)
+            actionButton.layout(.top, to: .bottom, of: message.extraAttributedText != nil ? extraLabel : descriptionLabel, offset: 30)
             actionButton.layoutToSuperview(.bottom, offset: -30)
             actionButton.layoutToSuperview(.leading, offset: 16)
             actionButton.layoutToSuperview(.trailing, offset: -16)
