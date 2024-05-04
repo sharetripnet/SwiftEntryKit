@@ -44,6 +44,7 @@ public struct EKPopUpMessage {
     public var cancelButton: EKProperty.ButtonContent?
     public var action: EKPopUpMessageAction
     public var cancelAction: EKPopUpMessageAction?
+    public var equalWidthButton: Bool
     
     var containsImage: Bool {
         return themeImage != nil
@@ -53,6 +54,7 @@ public struct EKPopUpMessage {
                 title: EKProperty.LabelContent,
                 description: EKProperty.LabelContent,
                 extraAttributedText: NSMutableAttributedString? = nil,
+                equalWidthButton: Bool = false,
                 actionButton: EKProperty.ButtonContent,
                 cancelButton: EKProperty.ButtonContent? = nil,
                 action: @escaping EKPopUpMessageAction,
@@ -65,5 +67,6 @@ public struct EKPopUpMessage {
         self.cancelButton = cancelButton
         self.action = action
         self.cancelAction = cancelAction
+        self.equalWidthButton = equalWidthButton
     }
 }

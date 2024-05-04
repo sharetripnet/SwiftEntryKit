@@ -559,7 +559,7 @@ class PresetsViewController: UIViewController {
         )
         let actionButton = EKProperty.ButtonContent(
             label: .init(
-                text: "Got it!",
+                text: "Big Text Got it!",
                 style: .init(
                     font: MainFont.bold.with(size: 16),
                     color: buttonTitleColor,

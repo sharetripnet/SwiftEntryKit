@@ -94,7 +94,9 @@ final public class EKPopUpMessageView: UIView {
             actionButton.layout(.top, to: .bottom, of: message.extraAttributedText != nil ? extraLabel : descriptionLabel, offset: 30)
             actionButton.layoutToSuperview(.bottom, offset: -30)
             actionButton.layoutToSuperview(.trailing, offset: -20)
-            actionButton.set(.width, of: (self.bounds.width - 80) / 2 - 4)
+            if message.equalWidthButton {
+                actionButton.set(.width, of: (self.bounds.width - 80) / 2 - 4)
+            }
             
             let buttonAttributes = message.actionButton
             actionButton.buttonContent = buttonAttributes
