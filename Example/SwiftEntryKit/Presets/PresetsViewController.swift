@@ -559,9 +559,9 @@ class PresetsViewController: UIViewController {
         )
         let actionButton = EKProperty.ButtonContent(
             label: .init(
-                text: "Big Text Got it!",
+                text: "View Pending Requests",
                 style: .init(
-                    font: MainFont.bold.with(size: 16),
+                    font: MainFont.bold.with(size: 14),
                     color: buttonTitleColor,
                     displayMode: displayMode
                 )
@@ -575,7 +575,7 @@ class PresetsViewController: UIViewController {
             label: .init(
                 text: "Cancel",
                 style: .init(
-                    font: MainFont.bold.with(size: 16),
+                    font: MainFont.bold.with(size: 14),
                     color: buttonTitleColor,
                     displayMode: displayMode
                 )

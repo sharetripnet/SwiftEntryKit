@@ -100,7 +100,7 @@ final public class EKPopUpMessageView: UIView {
             
             let buttonAttributes = message.actionButton
             actionButton.buttonContent = buttonAttributes
-            actionButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
+            actionButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
             actionButton.layer.cornerRadius = 8 // height * 0.5
             actionButton.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
             
@@ -112,7 +112,7 @@ final public class EKPopUpMessageView: UIView {
             
             let cancelbuttonAttributes = message.cancelButton!
             cancelButton.buttonContent = cancelbuttonAttributes
-            cancelButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
+            cancelButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
             cancelButton.layer.cornerRadius = 8 // height * 0.5
             cancelButton.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
             
