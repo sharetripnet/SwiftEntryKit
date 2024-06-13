@@ -54,7 +54,7 @@ public struct EKPopUpMessage {
                 title: EKProperty.LabelContent,
                 description: EKProperty.LabelContent,
                 extraAttributedText: NSMutableAttributedString? = nil,
-                equalWidthButton: Bool = false,
+                equalWidthButton: Bool = true,
                 actionButton: EKProperty.ButtonContent,
                 cancelButton: EKProperty.ButtonContent? = nil,
                 action: @escaping EKPopUpMessageAction,
