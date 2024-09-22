@@ -45,6 +45,7 @@ public struct EKPopUpMessage {
     public var action: EKPopUpMessageAction
     public var cancelAction: EKPopUpMessageAction?
     public var equalWidthButton: Bool
+    public var roundedButton: Bool
     
     var containsImage: Bool {
         return themeImage != nil
@@ -57,6 +58,7 @@ public struct EKPopUpMessage {
                 equalWidthButton: Bool = true,
                 actionButton: EKProperty.ButtonContent,
                 cancelButton: EKProperty.ButtonContent? = nil,
+                roundedButton: Bool = false,
                 action: @escaping EKPopUpMessageAction,
                 cancelAction: @escaping EKPopUpMessageAction) {
         self.themeImage = themeImage
@@ -68,5 +70,6 @@ public struct EKPopUpMessage {
         self.action = action
         self.cancelAction = cancelAction
         self.equalWidthButton = equalWidthButton
+        self.roundedButton = roundedButton
     }
 }
