@@ -559,7 +559,7 @@ class PresetsViewController: UIViewController {
         )
         let actionButton = EKProperty.ButtonContent(
             label: .init(
-                text: "View Pending Requests",
+                text: "View Requests",
                 style: .init(
                     font: MainFont.bold.with(size: 14),
                     color: buttonTitleColor,
@@ -594,7 +594,11 @@ class PresetsViewController: UIViewController {
         let attributedText = NSMutableAttributedString()
         attributedText.append(NSAttributedString(string: "Payable Amount ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .semibold)]))
         attributedText.append(NSAttributedString(string: "USD 1,429.80", attributes: [NSAttributedString.Key.foregroundColor: UIColor.green, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .semibold)]))
-        let message = EKPopUpMessage(themeImage: themeImage, title: title, description: description, extraAttributedText: attributedText, actionButton: actionButton, cancelButton: cancelButton) {
+        let specialNoteText = NSMutableAttributedString()
+        specialNoteText.append(NSAttributedString(string: "As per Bangladesh Bank's guideline, ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)]))
+        specialNoteText.append(NSAttributedString(string: "SOTO tickets and International hotels will be deducted from your annual travel quota and charged in USD.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13, weight: .semibold)]))
+        specialNoteText.append(NSAttributedString(string: "Adherence to this guideline is mandatory for all relevant transactions.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)]))
+        let message = EKPopUpMessage(themeImage: themeImage, title: title, description: description, extraAttributedText: attributedText, specialNoteText: specialNoteText, actionButton: actionButton, cancelButton: cancelButton) {
             SwiftEntryKit.dismiss()
         } cancelAction: {
 //            SwiftEntryKit.dismiss()

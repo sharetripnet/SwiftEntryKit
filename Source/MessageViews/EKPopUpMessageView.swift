@@ -18,6 +18,16 @@ final public class EKPopUpMessageView: UIView {
     private let extraLabel = UILabel()
     private let actionButton = UIButton()
     private let cancelButton = UIButton()
+    private let specialNoteLabel = UILabel()
+    private lazy var specialNotesView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.backgroundColor = UIColor(rgb: 0xFFEEDB)
+        stackView.layer.cornerRadius = 8
+        stackView.layoutMargins = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+        return stackView
+    }()
+    
     
     private let message: EKPopUpMessage
     
@@ -30,6 +40,7 @@ final public class EKPopUpMessageView: UIView {
         setupTitleLabel()
         setupDescriptionLabel()
         setupExtraLabel()
+        setupSpecialNotesView()
         setupActionButton()
         setupInterfaceStyle()
     }
@@ -85,13 +96,36 @@ final public class EKPopUpMessageView: UIView {
         }
     }
     
+    private func setupSpecialNotesView() {
+        if let attributedText = message.specialNoteText {
+            addSubview(specialNotesView)
+            if message.extraAttributedText != nil {
+                specialNotesView.layout(.top, to: .bottom, of: extraLabel, offset: 20)
+            } else {
+                specialNotesView.layout(.top, to: .bottom, of: descriptionLabel, offset: 20)
+            }
+            specialNotesView.layoutToSuperview(axis: .horizontally, offset: 20)
+            specialNoteLabel.translatesAutoresizingMaskIntoConstraints = false
+            specialNoteLabel.attributedText = attributedText
+            specialNoteLabel.numberOfLines = 0
+            specialNoteLabel.textAlignment = .center
+            specialNotesView.addArrangedSubview(specialNoteLabel)
+        }
+    }
+    
     private func setupActionButton() {
         addSubview(actionButton)
         if message.cancelButton != nil {
             addSubview(cancelButton)
             let height: CGFloat = 40
             actionButton.set(.height, of: height)
-            actionButton.layout(.top, to: .bottom, of: message.extraAttributedText != nil ? extraLabel : descriptionLabel, offset: 30)
+            if message.specialNoteText != nil {
+                actionButton.layout(.top, to: .bottom, of: specialNotesView, offset: 30)
+            } else if message.extraAttributedText != nil {
+                actionButton.layout(.top, to: .bottom, of: extraLabel, offset: 30)
+            } else {
+                actionButton.layout(.top, to: .bottom, of: descriptionLabel, offset: 30)
+            }
             actionButton.layoutToSuperview(.bottom, offset: -30)
             actionButton.layoutToSuperview(.trailing, offset: -20)
             if message.equalWidthButton {
@@ -103,9 +137,14 @@ final public class EKPopUpMessageView: UIView {
             actionButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
             actionButton.layer.cornerRadius = message.roundedButton ? (height * 0.5) : 8
             actionButton.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
-            
             cancelButton.set(.height, of: height)
-            cancelButton.layout(.top, to: .bottom, of: message.extraAttributedText != nil ? extraLabel : descriptionLabel, offset: 30)
+            if message.specialNoteText != nil {
+                cancelButton.layout(.top, to: .bottom, of: specialNotesView, offset: 30)
+            } else if message.extraAttributedText != nil {
+                cancelButton.layout(.top, to: .bottom, of: extraLabel, offset: 30)
+            } else {
+                cancelButton.layout(.top, to: .bottom, of: descriptionLabel, offset: 30)
+            }
             cancelButton.layoutToSuperview(.bottom, offset: -30)
             cancelButton.layoutToSuperview(.leading, offset: 20)
             cancelButton.layout(.trailing, to: .leading, of: actionButton, offset: -8)
@@ -120,7 +159,13 @@ final public class EKPopUpMessageView: UIView {
         } else {
             let height: CGFloat = 40
             actionButton.set(.height, of: height)
-            actionButton.layout(.top, to: .bottom, of: message.extraAttributedText != nil ? extraLabel : descriptionLabel, offset: 30)
+            if message.specialNoteText != nil {
+                actionButton.layout(.top, to: .bottom, of: specialNotesView, offset: 30)
+            } else if message.extraAttributedText != nil {
+                actionButton.layout(.top, to: .bottom, of: extraLabel, offset: 30)
+            } else {
+                actionButton.layout(.top, to: .bottom, of: descriptionLabel, offset: 30)
+            }
             actionButton.layoutToSuperview(.bottom, offset: -30)
             actionButton.layoutToSuperview(.leading, offset: 16)
             actionButton.layoutToSuperview(.trailing, offset: -16)
@@ -131,8 +176,6 @@ final public class EKPopUpMessageView: UIView {
             actionButton.layer.cornerRadius = message.roundedButton ? (height * 0.5) : 8
             actionButton.addTarget(self, action: #selector(actionButtonPressed), for: .touchUpInside)
         }
-        
-       
     }
     
     private func setupInterfaceStyle() {
