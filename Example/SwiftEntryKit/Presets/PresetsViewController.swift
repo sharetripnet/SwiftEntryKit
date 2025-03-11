@@ -559,7 +559,7 @@ class PresetsViewController: UIViewController {
         )
         let actionButton = EKProperty.ButtonContent(
             label: .init(
-                text: "View Requests",
+                text: "Confirm",
                 style: .init(
                     font: MainFont.bold.with(size: 14),
                     color: buttonTitleColor,
@@ -598,7 +598,7 @@ class PresetsViewController: UIViewController {
         specialNoteText.append(NSAttributedString(string: "As per Bangladesh Bank's guideline, ", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)]))
         specialNoteText.append(NSAttributedString(string: "SOTO tickets and International hotels will be deducted from your annual travel quota and charged in USD.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13, weight: .semibold)]))
         specialNoteText.append(NSAttributedString(string: "Adherence to this guideline is mandatory for all relevant transactions.", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)]))
-        let message = EKPopUpMessage(themeImage: themeImage, title: title, description: description, extraAttributedText: attributedText, specialNoteText: specialNoteText, actionButton: actionButton, cancelButton: cancelButton) {
+        let message = EKPopUpMessage(themeImage: themeImage, title: title, description: description, extraAttributedText: attributedText, specialNoteText: specialNoteText, equalWidthButton: true, actionButton: actionButton, cancelButton: cancelButton, roundedButton: true) {
             SwiftEntryKit.dismiss()
         } cancelAction: {
 //            SwiftEntryKit.dismiss()
