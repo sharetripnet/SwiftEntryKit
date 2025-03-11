@@ -92,7 +92,7 @@ struct PresetsDataSource {
         )
         attributes.positionConstraints.verticalOffset = 10
         attributes.positionConstraints.size = .init(
-            width: .offset(value: 20),
+            width: .offset(value: 12),
             height: .intrinsic
         )
         attributes.positionConstraints.maxSize = .init(
